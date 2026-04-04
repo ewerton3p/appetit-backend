@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/1 - API/">
+    <Project Path="Appetit/Appetit.API.csproj" />
+  </Folder>
+  <Folder Name="/2 - Application/">
+    <Project Path="Appetit.Application/Appetit.Application.csproj" />
+  </Folder>
+  <Folder Name="/3 - Domain/">
+    <Project Path="Appetit.Domain/Appetit.Domain.csproj" />
+  </Folder>
+  <Folder Name="/4 - Infrastructure/">
+    <Project Path="Appetit.Infrastructure/Appetit.Infrastructure.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,6 @@
+@Appetit_HostAddress = http://localhost:5178
+
+GET {{Appetit_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
