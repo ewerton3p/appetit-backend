@@ -1,4 +1,5 @@
-﻿using Appetit.Application.DTOs.Category;
+﻿using Microsoft.AspNetCore.Authorization;
+using Appetit.Application.DTOs.Category;
 using Appetit.Application.Interfaces;
 using Appetit.Domain.Common.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ namespace Appetit.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoriesController : ControllerBase
     {
 

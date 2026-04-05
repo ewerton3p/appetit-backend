@@ -25,5 +25,11 @@
                 Name = categoryCreateDTO.Name
             };
         }
+
+        public static Domain.Models.Category ToCategory(this CategoryCreateDTO categoryCreateDTO, Domain.Models.Category category)
+        {
+            category.Name = categoryCreateDTO.Name;
+            return category;
+        }
     }
 }

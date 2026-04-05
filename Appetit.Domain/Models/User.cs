@@ -1,9 +1,9 @@
-﻿using Appetit.Domain.Common.Utils;
+using Appetit.Domain.Common.Utils;
 using System.ComponentModel.DataAnnotations;
 
 namespace Appetit.Domain.Models
 {
-    public class Category : Entity
+    public class User : Entity
     {
         [Key]
         public int Id { get; set; }
@@ -11,13 +11,11 @@ namespace Appetit.Domain.Models
         [MaxLength(255)]
         public required string Name { get; set; }
 
-        public User? CreatedBy { get; set; }
+        [MaxLength(255)]
+        public required string Email { get; set; }
 
-        public int? CreatedById { get; set; }
-
-        public User? UpdatedBy { get; set; }
-
-        public int? UpdatedById { get; set; }
+        [MaxLength(255)]
+        public required string PasswordHash { get; set; }
 
         public DateTimeOffset CreatedAt { get; set; } = DateUtils.GetCurrentUtcDateTime();
 

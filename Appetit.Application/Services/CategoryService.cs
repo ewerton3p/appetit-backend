@@ -12,19 +12,23 @@ namespace Appetit.Application.Services
     public class CategoryService : ICategoryService
     {
 
+        private readonly IUserService _userService;
         private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(IUserService userService, ICategoryRepository categoryRepository)
         {
+            _userService = userService;
             _categoryRepository = categoryRepository;
         }
 
         public async Task<Response> CreateCategory(CategoryCreateDTO newCategory)
-        {
+        {            
+
             Response response = new();
 
             Category category = newCategory.ToCategory();
-            
+            category.CreatedById = await _userService.GetLoggedUserId();
+
             await _categoryRepository.AddAsync(category);
 
             response.Message = "Categoria criada com sucesso.";
@@ -102,8 +106,9 @@ namespace Appetit.Application.Services
 
             Category? category = _categoryRepository.GetByIdAsync(id).Result ?? throw new NotFoundException($"Categoria com o código: {id} não foi localizada.");
 
-            category = updatedCategory.ToCategory();
-            
+            updatedCategory.ToCategory(category);
+            category.UpdatedById = await _userService.GetLoggedUserId();
+
             await _categoryRepository.Update(category);
 
             response.Message = "Categoria atualizada com sucesso.";

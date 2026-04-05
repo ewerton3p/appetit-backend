@@ -1,4 +1,5 @@
 using Appetit.API.Extensions;
+using Appetit.API.Middlewares;
 using Appetit.Infrastructure.Data;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,8 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDependencyInjections();
 builder.Services.AddRepositoriesInjections();
+
+builder.Services.AddJWTAuth(builder.Configuration);
 
 var cultureInfo = new CultureInfo("pt-BR");
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
@@ -37,6 +40,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Permite que a app reconheça o IP e protocolo originais quando está atrás de um proxy reverso.
 // Essencial para manter URLs corretas e segurança em produção.

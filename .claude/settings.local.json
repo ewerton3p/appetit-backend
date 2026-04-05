@@ -3,7 +3,9 @@
     "allow": [
       "Bash(xargs grep:*)",
       "Bash(dotnet add:*)",
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "Bash(grep -E \"^\\\\.\\\\/[^/]+$\")",
+      "Bash(dotnet ef:*)"
     ]
   }
 }
