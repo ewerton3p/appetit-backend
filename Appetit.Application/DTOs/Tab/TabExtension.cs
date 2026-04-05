@@ -8,6 +8,10 @@ namespace Appetit.Application.DTOs.Tab
             Identifier = tab.Identifier,
             Active = tab.Active,
             Type = tab.Type,
+            CreatedById = tab.CreatedById,
+            CreatedByName = tab.CreatedBy?.Name ?? "",
+            UpdatedById = tab.UpdatedById,
+            UpdatedByName = tab.UpdatedBy?.Name ?? "",
             CreatedAt = tab.CreatedAt,
             UpdatedAt = tab.UpdatedAt
         };

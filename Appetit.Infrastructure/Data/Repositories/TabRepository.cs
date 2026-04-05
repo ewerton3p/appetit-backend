@@ -1,6 +1,7 @@
 using Appetit.Domain.Common.Utils;
 using Appetit.Domain.Models;
 using Appetit.Infrastructure.Data.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Appetit.Infrastructure.Data.Repositories
@@ -33,7 +34,10 @@ namespace Appetit.Infrastructure.Data.Repositories
 
         public async Task<Tab?> GetByIdAsync(int id)
         {
-            return await _repositoryBase.GetByIdAsync(id);
+            return await _dbContext.Tabs
+                .Include(t => t.CreatedBy)
+                .Include(t => t.UpdatedBy)
+                .FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task<PaginatedResult<Tab>> GetWithPagination(int page, Expression<Func<Tab, bool>>? filter = null, Expression<Func<Tab, object>>? order = null)

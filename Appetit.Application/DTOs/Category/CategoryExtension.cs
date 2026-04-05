@@ -8,6 +8,10 @@
             {
                 Id = category.Id,
                 Name = category.Name,
+                CreatedById = category.CreatedById,
+                UpdatedById = category.UpdatedById,
+                CreatedByName = category.CreatedBy?.Name ?? "",
+                UpdatedByName = category.UpdatedBy?.Name ?? "",
                 CreatedAt = category.CreatedAt,
                 UpdatedAt = category.UpdatedAt
             };

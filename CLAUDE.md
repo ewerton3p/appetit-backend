@@ -111,6 +111,10 @@ namespace Appetit.Application.DTOs.Product
         {
             Id = product.Id,
             Name = product.Name,
+            CreatedById = product.CreatedById,
+            CreatedByName = product.CreatedBy?.Name ?? "",
+            UpdatedById = product.UpdatedById,
+            UpdatedByName = product.UpdatedBy?.Name ?? "",
             CreatedAt = product.CreatedAt,
             UpdatedAt = product.UpdatedAt
         };
@@ -159,6 +163,22 @@ await _productRepository.Update(product);
 - Injeta `IRepositoryBase<TEntity>` e `ApplicationDbContext`
 - Sempre atualizar `UpdatedAt` com `DateUtils.GetCurrentUtcDateTime()` no método `Update`
 - O auto-registro funciona porque o nome segue o padrão `NomeDaClasse` : `INomeDaClasse`
+
+#### `GetByIdAsync` com navegação de auditoria
+
+Quando o endpoint de busca por ID precisa retornar os dados de `CreatedBy` e `UpdatedBy`, sobrescreva `GetByIdAsync` usando o `_dbContext` diretamente com `.Include()`:
+
+```csharp
+public async Task<Category?> GetByIdAsync(int id)
+{
+    return await _dbContext.Categories
+        .Include(c => c.CreatedBy)
+        .Include(c => c.UpdatedBy)
+        .FirstOrDefaultAsync(c => c.Id == id);
+}
+```
+
+Lembre de adicionar `using Microsoft.EntityFrameworkCore;` para ter acesso ao `Include` e `FirstOrDefaultAsync`.
 
 ### Controllers
 **Local:** `Appetit/Controllers/NomeDoRecursoController.cs`
