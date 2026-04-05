@@ -12,6 +12,10 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Category> Categories {  get; set; }
 
+    public DbSet<City> Cities { get; set; }
+
+    public DbSet<Size> Sizes { get; set; }
+
     public DbSet<Tab> Tabs { get; set; }
 
     public DbSet<User> Users { get; set; }
