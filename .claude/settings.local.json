@@ -5,7 +5,12 @@
       "Bash(dotnet add:*)",
       "Bash(dotnet build:*)",
       "Bash(grep -E \"^\\\\.\\\\/[^/]+$\")",
-      "Bash(dotnet ef:*)"
+      "Bash(dotnet ef:*)",
+      "Bash(dotnet list:*)",
+      "Bash(dotnet-script)",
+      "Bash(dotnet fsi -e ':*)",
+      "Read(//tmp/CheckNs/**)",
+      "Bash(dotnet run:*)"
     ]
   }
 }
