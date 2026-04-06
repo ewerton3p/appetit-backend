@@ -3,14 +3,13 @@ using Appetit.API.Middlewares;
 using Appetit.Infrastructure.Data;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
-using Scalar.AspNetCore;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApiWithAuth();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDependencyInjections();
@@ -35,11 +34,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.MapScalarApiReference();
-}
+app.UseOpenApiWithScalar();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
